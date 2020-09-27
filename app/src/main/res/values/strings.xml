@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+
+    <string name="temperature_is">Temperature is %1s</string>
+    <string name="wind_speed_is">Wind speed is %1s</string>
+    <string name="no_data_temperature">No data for temperature</string>
+    <string name="no_data_wind_speed">No data for wind speed</string>
+
+</resources>

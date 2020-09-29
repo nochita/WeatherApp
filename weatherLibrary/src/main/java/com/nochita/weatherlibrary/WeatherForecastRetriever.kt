@@ -6,7 +6,7 @@ import com.nochita.weatherlibrary.usecase.WeatherForecastUseCaseImpl
 
 class WeatherForecastRetriever {
 
-        suspend fun retrieveWeatherForecast(latitude : String, longitude : String) : WeatherForecast{
+        suspend fun retrieveWeatherForecast(latitude: String = "-34", longitude : String = "-58") : WeatherForecast{
             val repository = WeatherForecastRepositoryImpl()
             val useCase = WeatherForecastUseCaseImpl()
             return useCase.getWeatherForecast(repository, latitude, longitude)

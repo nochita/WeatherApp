@@ -7,18 +7,30 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.nochita.weatherapp.R
+import com.nochita.weatherapp.WeatherForecastApplication
 import com.nochita.weatherapp.viewmodel.MainViewModel
 import com.nochita.weatherlibrary.WeatherForecastRetriever
 import com.nochita.weatherlibrary.domain.model.WeatherForecast
 import kotlinx.android.synthetic.main.fragment_main.*
+import javax.inject.Inject
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: MainViewModel by viewModels()
 
+    @Inject
+    lateinit var weatherForecastRetriever : WeatherForecastRetriever
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.let {
+            (it.application as WeatherForecastApplication).getWeatherForecastComponent().inject(this)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val weatherForecastRetriever = WeatherForecastRetriever() //inject with DI
+
         viewModel.retrieveWeatherForecast(weatherForecastRetriever)
 
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
